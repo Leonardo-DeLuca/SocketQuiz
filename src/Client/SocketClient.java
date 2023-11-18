@@ -10,26 +10,23 @@ import java.util.Scanner;
 public class SocketClient {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
-        while(true) {
             Socket clientSocket = inicializandoSocket();
             DataInputStream inbound = geraStreamInput(clientSocket);
             DataOutputStream outbound = geraStreamOutput(clientSocket);
 
-            System.out.println("Escreva um int: ");
+            String perguntaTitulo = inbound.readUTF();
+
+            System.out.println(perguntaTitulo);
+            System.out.println(inbound.readFloat());
             Scanner sc = new Scanner(System.in);
 
-            int message = sc.nextInt();
+            float respostaCliente = sc.nextFloat();
 
-            outbound.writeInt(message);
+            outbound.writeFloat(respostaCliente);
 
             inbound.close();
             outbound.close();
             clientSocket.close();
-
-            if (message == 0) break;
-
-        }
     }
 
     public static Socket inicializandoSocket() throws IOException {

@@ -12,21 +12,37 @@ public class SocketServer {
         ServerSocket server = inicializandoSocket();
         DataInputStream inbound;
         DataOutputStream outbound;
+        Pergunta pergunta;
+
         while(true){
             System.out.println("Waiting for the client request");
             Socket socket = server.accept();
             inbound = geraStreamInput(socket);
             outbound = geraStreamOutput(socket);
+            pergunta = new Pergunta();
 
-            int k = inbound.readInt();
+            String perguntaTitulo = pergunta.getTitulo();
+            Float respostaCorreta = pergunta.getResposta();
+            Float respostaCliente;
 
-            System.out.println(k);
+            outbound.writeUTF(perguntaTitulo);
+            outbound.writeFloat(respostaCorreta);
+            respostaCliente = inbound.readFloat();
+
+            System.out.println(respostaCorreta);
+            System.out.println(respostaCliente);
+
+            if(respostaCliente.equals(respostaCorreta)){
+                System.out.println("Resposta Correta!");
+            }else {
+                System.out.println("Resposta Errada!");
+            }
 
             inbound.close();
             outbound.close();
             socket.close();
 
-            if(k == 0) break;
+            if(respostaCliente == 0) break;
         }
 
         System.out.println("Shutting down Socket server!!");
