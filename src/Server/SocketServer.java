@@ -5,16 +5,21 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DecimalFormat;
 
 public class SocketServer {
 
-    public static void main(String[] args) throws IOException {
+    private static final DecimalFormat df = new DecimalFormat("#.##");
+
+    public void exec() throws IOException{
         ServerSocket server = inicializandoSocket();
         DataInputStream inbound;
         DataOutputStream outbound;
         Pergunta pergunta;
+        Boolean gameOver = false;
+        int contaPerguntas = 0;
 
-        while(true){
+        while(!gameOver && contaPerguntas < 5){
             System.out.println("Waiting for the client request");
             Socket socket = server.accept();
             inbound = geraStreamInput(socket);
@@ -29,20 +34,27 @@ public class SocketServer {
             outbound.writeFloat(respostaCorreta);
             respostaCliente = inbound.readFloat();
 
-            System.out.println(respostaCorreta);
-            System.out.println(respostaCliente);
+            String strRespostaCorretaFormatada;
+            df.setRoundingMode(java.math.RoundingMode.DOWN);
+            strRespostaCorretaFormatada = df.format(respostaCorreta);
+
+            strRespostaCorretaFormatada = strRespostaCorretaFormatada.replace(',', '.');
+            respostaCorreta = Float.parseFloat(strRespostaCorretaFormatada);
+
 
             if(respostaCliente.equals(respostaCorreta)){
                 System.out.println("Resposta Correta!");
             }else {
                 System.out.println("Resposta Errada!");
+                gameOver = true;
             }
+
+            contaPerguntas++;
+            outbound.writeBoolean(gameOver);
 
             inbound.close();
             outbound.close();
             socket.close();
-
-            if(respostaCliente == 0) break;
         }
 
         System.out.println("Shutting down Socket server!!");

@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f177abce-4097-421a-ac40-6c1b04eded43" name="Changes" comment="inicio">
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Server/Pergunta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/SocketClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/Pergunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Pergunta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/SocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/SocketServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

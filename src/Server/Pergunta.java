@@ -6,7 +6,7 @@ public class Pergunta{
 
     private String titulo;
     private float resposta;
-    private int[] numeros;
+    private float[] numeros;
     private String[] operacoes;
 
     public Pergunta() {
@@ -15,7 +15,7 @@ public class Pergunta{
     }
 
     private void setaValores(){
-        numeros = new int[1000];
+        numeros = new float[1000];
         for (int i = 0; i < numeros.length; i++) {
             numeros[i] = i;
         }
@@ -23,7 +23,7 @@ public class Pergunta{
     }
 
     private void definePergunta(){
-        int valor1, valor2;
+        float valor1, valor2;
         String operacao;
 
         Random indiceRandom = new Random();
@@ -44,7 +44,9 @@ public class Pergunta{
         } else if(operacao.equals("/")){
             resposta = valor1/valor2;
         }
+
     }
+
 
     public String getTitulo() {
         return titulo;
