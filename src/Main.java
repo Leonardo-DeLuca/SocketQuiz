@@ -2,7 +2,6 @@ import Client.SocketClient;
 import Server.SocketServer;
 
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
 public class Main {
 

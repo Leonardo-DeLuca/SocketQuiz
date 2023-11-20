@@ -17,9 +17,10 @@ public class SocketServer {
         DataOutputStream outbound;
         Pergunta pergunta;
         Boolean gameOver = false;
+        int maxPerguntas = 5;
         int contaPerguntas = 0;
 
-        while(!gameOver && contaPerguntas < 5){
+        while(!gameOver && contaPerguntas < maxPerguntas){
             System.out.println("Waiting for the client request");
             Socket socket = server.accept();
             inbound = geraStreamInput(socket);
@@ -31,7 +32,6 @@ public class SocketServer {
             Float respostaCliente;
 
             outbound.writeUTF(perguntaTitulo);
-            outbound.writeFloat(respostaCorreta);
             respostaCliente = inbound.readFloat();
 
             String strRespostaCorretaFormatada;

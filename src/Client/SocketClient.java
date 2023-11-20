@@ -1,42 +1,69 @@
 package Client;
 
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Locale;
-import java.util.Scanner;
 
-public class SocketClient {
+public class SocketClient{
 
     public void exec() throws IOException{
 
+        int maxPerguntas = 5;
         int contaPerguntas = 0;
         Boolean gameOver = false;
 
-        while(!gameOver && contaPerguntas < 5) {
+        Interface intfc = new Interface();
+
+        while(!gameOver && contaPerguntas < maxPerguntas) {
             Socket clientSocket = inicializandoSocket();
             DataInputStream inbound = geraStreamInput(clientSocket);
             DataOutputStream outbound = geraStreamOutput(clientSocket);
 
             String perguntaTitulo = inbound.readUTF();
 
-            System.out.println(perguntaTitulo);
-            System.out.println(inbound.readFloat());
-            Scanner sc = new Scanner(System.in);
-            sc.useLocale(Locale.US);
+            intfc.setPergunta(perguntaTitulo);
 
-            float respostaCliente = sc.nextFloat();
+            System.out.println(perguntaTitulo);
+
+            while (intfc.getResposta() == null) {
+                try {
+                    Thread.sleep(100); // Aguarda um curto período antes de verificar novamente
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            float respostaCliente = intfc.getResposta();
 
             outbound.writeFloat(respostaCliente);
 
-            contaPerguntas++;
             gameOver = inbound.readBoolean();
+
+            if(gameOver){
+                intfc.exibirMensagem("Resposta incorreta finalizando o jogo com " + contaPerguntas + "/" + maxPerguntas + " perguntas corretas!");
+                intfc.dispose();
+            }
+            else{
+                intfc.exibirMensagem("Resposta Correta!");
+                intfc.respostaTextField.setText("");
+            }
 
             inbound.close();
             outbound.close();
             clientSocket.close();
+
+            intfc.setResposta(null);
+
+            contaPerguntas++;
+
+            if(!gameOver && contaPerguntas == 5){
+                intfc.exibirMensagem("Fim de jogo! Você acertou todas as perguntas!");
+                intfc.dispose();
+            }
+
         }
     }
 
