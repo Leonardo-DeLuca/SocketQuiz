@@ -21,7 +21,7 @@ public class SocketServer {
         int contaPerguntas = 0;
 
         while(!gameOver && contaPerguntas < maxPerguntas){
-            System.out.println("Waiting for the client request");
+            System.out.println("Esperando requisição do cliente");
             Socket socket = server.accept();
             inbound = geraStreamInput(socket);
             outbound = geraStreamOutput(socket);
@@ -57,7 +57,7 @@ public class SocketServer {
             socket.close();
         }
 
-        System.out.println("Shutting down Socket server!!");
+        System.out.println("Desligando servidor!!");
         server.close();
 
 

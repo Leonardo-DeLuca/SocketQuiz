@@ -15,7 +15,7 @@ public class Pergunta{
     }
 
     private void setaValores(){
-        numeros = new float[1000];
+        numeros = new float[100];
         for (int i = 0; i < numeros.length; i++) {
             numeros[i] = i;
         }

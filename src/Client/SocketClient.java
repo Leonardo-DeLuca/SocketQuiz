@@ -26,8 +26,6 @@ public class SocketClient{
 
             intfc.setPergunta(perguntaTitulo);
 
-            System.out.println(perguntaTitulo);
-
             while (intfc.getResposta() == null) {
                 try {
                     Thread.sleep(100); // Aguarda um curto período antes de verificar novamente
