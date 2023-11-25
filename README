@@ -1,0 +1,11 @@
+Programa desenvolvido em java utilizando sockets cliente e servidor e implementação de um quiz matemático.
+
+O quiz consiste em 5 perguntas geradas aleatóriamente, para ganhar deve-se acertar todas, caso erre alguma o quiz finalizará.
+
+OBS: Respostas com valores decimais devem ser inseridas com o uso de "." para separar as casas decimais e a resposta deve ser dada com apenas as duas primeiras casas decimais.
+
+Para rodar o programa execute o arquivo jar presente no seguinte diretório. SocketQuiz/out/artifacts/SocketQuiz_jar/SocketQuiz.jar.
+
+Caso queira executar via alguma IDE, apenas execute a classe Main que assim ela configura o cliente e o servidor a partir de duas threads.
+
+O servidor é setado na porta 9888 e utiliza o localhost para conexão.
